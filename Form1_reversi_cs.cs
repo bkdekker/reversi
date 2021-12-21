@@ -101,10 +101,19 @@ namespace Reversi
             Panel.Invalidate();
         }
 
-        bool mogelijk(int x, int y)
+        bool mogelijk(int i, int j)
         {
-            if (vak[x, y] == 0)
+            if (vak[i, j] == 0)
             {
+                for (int x = i - 1; x < 2; x++)
+                    for (int y = j -1; y < 2; y++)
+                    {
+                        if (vak[x,y] != beurt && vak[x,y] != 0)
+                        {
+                            ingesloten(x, y);
+                        }
+                    }
+                /*
 
                 //het is mogelijk als aangrenzend vakje van [x,y] != beur
                 if (vak[x + 1, y] != beurt && vak[x + 1, y] != 0)
@@ -120,7 +129,7 @@ namespace Reversi
 
                 else if (vak[x - 1, y] != beurt && vak[x - 1, y] != 0)
                 {
-                    for (int a = x - 1; a < hor; a++)
+                    for (int a = x - 1; a < hor; a--)
                     {
                         if (vak[a, y] == beurt)
                             return true;
@@ -137,26 +146,29 @@ namespace Reversi
                 }
                 else if (vak[x, y - 1] != beurt && vak[x, y - 1] != 0)
                 {
-                    for (int a = y - 1; a < hor; a++)
+                    for (int a = y - 1; a < hor; a--)
                     {
                         if (vak[x, a] == beurt)
                             return true;
                     }
                 }
                 else return false;
+                */
             }
             return false;
 
 
         }
-        bool inrijx(int x, int y)
+        bool ingesloten(int dx, int dy)
         {
-
-            return true;
-        }
-        bool inrijy(int x, int y)
-        {
-            return true;
+            for (int a = 1; a < 6; a++)
+            {
+                if (vak[a * dx, a * dy] == beurt)
+                    return true;
+                if (vak[a * dx, a * dy] == 0)
+                    return false;
+            }
+            return false;
         }
         private void tekenveld(object sender, PaintEventArgs pea)
             
