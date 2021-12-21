@@ -65,7 +65,7 @@ namespace Reversi
 
         private void zetwaardes ( object sender, MouseEventArgs mea)
         {
-            // if (mogelijk())
+
             for (int a = 0; a < hor; a++)
             {
                 if ((a* Panel.Size.Width / hor) < mea.X && mea.X < ((a + 1)* Panel.Size.Width / hor))
@@ -77,6 +77,8 @@ namespace Reversi
                             if (mogelijk(a,b))
                             {
                                 this.vak[a, b] = beurt;
+                                //aanpasinrichting(a, b);
+
                                 if (beurt == 1)
                                 {
                                     beurt = 2;
@@ -88,85 +90,54 @@ namespace Reversi
                                     beurt = 1;
                                     label1.Text = "rood is aan zet";
                                 }
-                            }
-                            
+                            }    
                     }
                 }    
             }
-
-                
-
-
-
             Panel.Invalidate();
         }
 
-        bool mogelijk(int i, int j)
+        bool mogelijk(int x, int y)
         {
-            if (vak[i, j] == 0)
+            if (vak[x, y] == 0)
             {
-                for (int x = i - 1; x < 2; x++)
-                    for (int y = j -1; y < 2; y++)
+                for (int dx = -1; dx < 2; dx++)
+                {
+                    for (int dy = -1; dy < 2; dy++)
                     {
-                        if (vak[x,y] != beurt && vak[x,y] != 0)
+
+                        if ((x + dx < hor && y + dy < vert) && (x + dx >= 0 && y + dy >= 0))
                         {
-                            ingesloten(x, y);
+                            if (vak[x + dx, y + dy] != beurt && vak[x + dx, y + dy] != 0)
+                            {
+                                if (ingesloten(x, y, dx, dy))
+                                {
+                                    return true;
+                                }
+                            }
                         }
                     }
-                /*
-
-                //het is mogelijk als aangrenzend vakje van [x,y] != beur
-                if (vak[x + 1, y] != beurt && vak[x + 1, y] != 0)
-                {
-                    for (int a = x + 1; a < hor; a++)
-                    {
-                        if (vak[a, y] == beurt)
-                            return true;
-                        
-                    }
-                    
                 }
 
-                else if (vak[x - 1, y] != beurt && vak[x - 1, y] != 0)
-                {
-                    for (int a = x - 1; a < hor; a--)
-                    {
-                        if (vak[a, y] == beurt)
-                            return true;
-                    }
-                }
-
-                else if (vak[x, y + 1] != beurt && vak[x, y + 1] != 0)
-                {
-                    for (int a = y + 1; a < hor; a++)
-                    {
-                        if (vak[x, a] == beurt)
-                            return true;
-                    }
-                }
-                else if (vak[x, y - 1] != beurt && vak[x, y - 1] != 0)
-                {
-                    for (int a = y - 1; a < hor; a--)
-                    {
-                        if (vak[x, a] == beurt)
-                            return true;
-                    }
-                }
-                else return false;
-                */
             }
             return false;
 
 
         }
-        bool ingesloten(int dx, int dy)
+
+        bool ingesloten(int x, int y, int dx, int dy)
         {
+
+
             for (int a = 1; a < 6; a++)
             {
-                if (vak[a * dx, a * dy] == beurt)
-                    return true;
-                if (vak[a * dx, a * dy] == 0)
-                    return false;
+                if ((x + a * dx < hor && y + a * dy < vert) && (x + a * dx >= 0 && y + a * dy >= 0))
+                {
+                    if (vak[x + a * dx, y + a * dy] == beurt)
+                        return true;
+                    if (vak[x + a * dx, y + a * dy] == 0)
+                        return false;
+                }
             }
             return false;
         }
@@ -178,6 +149,10 @@ namespace Reversi
                 for (int y = 0; y < vert; y++)
                 {
                     pea.Graphics.DrawRectangle(Pens.Black, 0 + x * (Panel.Size.Width / hor), 0 + y * (Panel.Size.Height / vert), Panel.Size.Width / hor, Panel.Size.Height / vert);
+                    if (mogelijk(x,y))
+                    {
+                        pea.Graphics.DrawEllipse(Pens.Gray, 0 + x * (Panel.Size.Width / hor), 0 + y * (Panel.Size.Height / vert), Panel.Size.Width / hor, Panel.Size.Height / vert);
+                    }
                 }
             }
         }
