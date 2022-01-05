@@ -26,12 +26,13 @@ namespace Reversi
         bool help;
         public Form1()
         {
+            InitializeComponent();
             zet_niet_mogelijk = false;
             einde_spel = false;
             help = false;
             beurt = 1;
-            this.hor = 6;
-            this.vert = 6;
+            this.hor = int.Parse(textBox_x.Text);
+            this.vert = int.Parse(textBox_y.Text);
             vak = new int[hor, vert];
             int handig_v = (vert / 2) - 1;
             int handig_h = (hor / 2) - 1;
@@ -59,7 +60,10 @@ namespace Reversi
                 }
             }
 
-            InitializeComponent();
+            
+
+            textBox_x.Text = this.hor.ToString();
+            textBox_y.Text = this.vert.ToString();
             breedte = Panel.Size.Width / hor;
             hoogte = Panel.Size.Height / vert;
             Panel.Paint += this.tekenveld;
@@ -68,14 +72,14 @@ namespace Reversi
             label_rood.Text = "2 stenen";
             label_blauw.Text = "2 stenen";
         }
-        void vergroten (object o, EventArgs ea)
+     /*   void vergroten (object o, EventArgs ea)
         {
             
-           int w = this.ClientSize.Width - 20;
+            int w = this.ClientSize.Width - 20;
             int h = this.ClientSize.Height - 50;
             Panel.Size = new Size(w, h);
             this.Invalidate();
-        }
+        }*/
         private void Reset_Click(object sender, EventArgs e)
         {
             int handig_v = (vert / 2) - 1;
@@ -293,6 +297,7 @@ namespace Reversi
                     if (mogelijk(x, y))
                     {
                         zet_niet_mogelijk = false;
+                        einde_spel = false;
                     }
 
                 }
@@ -310,6 +315,9 @@ namespace Reversi
                 }
                 if (r == b)
                     MessageBox.Show("geen zet meer mogelijk, het is gelijkspel");
+                zet_niet_mogelijk = false;
+                Reset_Click(this, pea);
+                
             }
             if (zet_niet_mogelijk == true)
             {
@@ -326,6 +334,7 @@ namespace Reversi
                     beurt = 1;
                     label1.Text = "rood is aan zet";
                 }
+                Panel.Invalidate();
             }
         }
 
@@ -356,6 +365,11 @@ namespace Reversi
             gr.FillEllipse(Brushes.Blue, 0, 0, panel_rood.Width - 1, panel_rood.Height - 1);
         }
 
-
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.hor = int.Parse(textBox_x.Text);
+            this.vert = int.Parse(textBox_y.Text);
+            Panel.Invalidate();
+        }
     }
 }

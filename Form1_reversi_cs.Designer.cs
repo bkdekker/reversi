@@ -36,6 +36,11 @@
             this.panel_blauw = new System.Windows.Forms.Panel();
             this.label_rood = new System.Windows.Forms.Label();
             this.label_blauw = new System.Windows.Forms.Label();
+            this.label_x = new System.Windows.Forms.Label();
+            this.label_y = new System.Windows.Forms.Label();
+            this.textBox_x = new System.Windows.Forms.TextBox();
+            this.textBox_y = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Panel
@@ -43,7 +48,7 @@
             this.Panel.Location = new System.Drawing.Point(14, 107);
             this.Panel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Panel.Name = "Panel";
-            this.Panel.Size = new System.Drawing.Size(562, 625);
+            this.Panel.Size = new System.Drawing.Size(536, 590);
             this.Panel.TabIndex = 0;
             // 
             // Reset
@@ -111,11 +116,60 @@
             this.label_blauw.TabIndex = 6;
             this.label_blauw.Text = "label3";
             // 
+            // label_x
+            // 
+            this.label_x.AutoSize = true;
+            this.label_x.Location = new System.Drawing.Point(520, 27);
+            this.label_x.Name = "label_x";
+            this.label_x.Size = new System.Drawing.Size(91, 20);
+            this.label_x.TabIndex = 7;
+            this.label_x.Text = "blokjes x-as";
+            // 
+            // label_y
+            // 
+            this.label_y.AutoSize = true;
+            this.label_y.Location = new System.Drawing.Point(520, 81);
+            this.label_y.Name = "label_y";
+            this.label_y.Size = new System.Drawing.Size(91, 20);
+            this.label_y.TabIndex = 8;
+            this.label_y.Text = "blokjes y-as";
+            // 
+            // textBox_x
+            // 
+            this.textBox_x.Location = new System.Drawing.Point(626, 24);
+            this.textBox_x.Name = "textBox_x";
+            this.textBox_x.Size = new System.Drawing.Size(67, 26);
+            this.textBox_x.TabIndex = 9;
+            this.textBox_x.Text = "6";
+            // 
+            // textBox_y
+            // 
+            this.textBox_y.Location = new System.Drawing.Point(626, 81);
+            this.textBox_y.Name = "textBox_y";
+            this.textBox_y.Size = new System.Drawing.Size(67, 26);
+            this.textBox_y.TabIndex = 10;
+            this.textBox_y.Text = "6";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(626, 123);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(67, 28);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "OK";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(593, 747);
+            this.ClientSize = new System.Drawing.Size(702, 704);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.textBox_y);
+            this.Controls.Add(this.textBox_x);
+            this.Controls.Add(this.label_y);
+            this.Controls.Add(this.label_x);
             this.Controls.Add(this.label_blauw);
             this.Controls.Add(this.label_rood);
             this.Controls.Add(this.panel_blauw);
@@ -142,5 +196,10 @@
         private System.Windows.Forms.Panel panel_blauw;
         private System.Windows.Forms.Label label_rood;
         private System.Windows.Forms.Label label_blauw;
+        private System.Windows.Forms.Label label_x;
+        private System.Windows.Forms.Label label_y;
+        private System.Windows.Forms.TextBox textBox_x;
+        private System.Windows.Forms.TextBox textBox_y;
+        private System.Windows.Forms.Button button2;
     }
 }
